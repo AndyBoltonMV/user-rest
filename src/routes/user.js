@@ -15,7 +15,8 @@ userRouter.get("/health", (req, res) => {
 userRouter.post("/", async (req, res) => {
   try {
     const user = await User.create(req.body);
-    res.status(201).send({ user });
+    const obj = { user: user };
+    res.status(201).send(obj);
   } catch (error) {
     res.status(500).send(error);
   }

@@ -10,9 +10,14 @@ const db = require("./db/db");
 //allow web server to parse JSON
 app.use(express.json());
 app.use("/user", userRouter);
+app.get("/sync", async (req, res) => {
+  await db.sync({ force: true });
+  res.sendStatus(200);
+});
 
 //listen on port
-app.listen(5001, async () => {
-  await db.sync();
-  console.log("Listening on port 5001");
-});
+// app.listen(5001, () => {
+//   console.log("Listening on port 5001");
+// });
+
+module.exports = app;
